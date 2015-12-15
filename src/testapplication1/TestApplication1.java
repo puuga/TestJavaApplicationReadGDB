@@ -5,6 +5,8 @@
  */
 package testapplication1;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
@@ -33,13 +35,15 @@ public class TestApplication1 {
 
     void jdbc() {
         // /Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB
-        String url = "jdbc:interbase://localhost/Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
-//        String url = "jdbc:firebirdsql:local:Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
+//        String url = "jdbc:interbase://localhost/Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
+        String url = "jdbc:firebirdsql:local:Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
         try {
 //            Class<?> forName;
 //            forName = Class.forName("interbase.interclient.Driver");
-            Class.forName("interbase.interclient.Driver");
-//            Class.forName("org.firebirdsql.jdbc.FBDriver");
+//            Class.forName("interbase.interclient.Driver");
+//System.load("/Users/siwaweswongcharoen/Downloads/Jaybird-2.2.9-JDK_1.8/libjaybird22_x64.so");
+//System.loadLibrary("jaybird22.so");
+            Class.forName("org.firebirdsql.jdbc.FBDriver");
 //            Driver d = new InterBase.interclient.Driver();
 
             Connection conn;
