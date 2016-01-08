@@ -10,6 +10,7 @@ import java.net.URLDecoder;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -35,24 +36,36 @@ public class TestApplication1 {
 
     void jdbc() {
         // /Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB
-//        String url = "jdbc:interbase://localhost/Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
-        String url = "jdbc:firebirdsql:local:Users/siwaweswongcharoen/Downloads/RICEHOUSE.GDB";
+//        String url = "jdbc:interbase:C:/Users/Siwawes/Downloads/RICEHOUSE.GDB";
+        String url = "jdbc:firebirdsql:local:C:/Users/Siwawes/Downloads/RICEHOUSE.GDB";
+//        String url = "jdbc:firebirdsql:embedded:C:/Users/Siwawes/Downloads/RICEHOUSE.GDB";
         try {
 //            Class<?> forName;
 //            forName = Class.forName("interbase.interclient.Driver");
 //            Class.forName("interbase.interclient.Driver");
 //System.load("/Users/siwaweswongcharoen/Downloads/Jaybird-2.2.9-JDK_1.8/libjaybird22_x64.so");
 //System.loadLibrary("jaybird22.so");
+//            Class.forName("org.firebirdsql.jdbc.FBDriver");
             Class.forName("org.firebirdsql.jdbc.FBDriver");
 //            Driver d = new InterBase.interclient.Driver();
 
             Connection conn;
             conn = DriverManager.getConnection(url, "SYSDBA", "masterkey");
+            
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM RDB$DATABASE");
+            
+            while (rs.next()) {
+                System.out.println(rs.getString(2));
+            }
 
 //            Statement stmt = conn.createStatement();
         } catch (SQLException | ClassNotFoundException ex) {
             Logger.getLogger(TestApplication1.class.getName()).log(Level.SEVERE, null, ex);
         }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TestApplication1.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     void dataSource() {
